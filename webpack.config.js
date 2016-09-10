@@ -9,16 +9,16 @@ let config;
 const nodeEnv = process.env.NODE_ENV || 'production'
 const PATHS = {
   app: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'build'),
+  build: path.join(__dirname, '_build'),
 }
 
 const common = {
   devtool: 'source-map',
   entry: {
-    filename: './index.js',
+    filename: path.resovle(PATHS.app, './js/index.jsx'),
   },
   output: {
-    filename: '_build/bundle.js',
+    filename: path.resovle(PATHS.build, './js/bundle.js'),
   },
   module: {
     loaders: [
@@ -26,7 +26,7 @@ const common = {
         test: /\.js$/,
         exclude: /node_modules/,
         query: {
-          presets: ['es2015-native-modules', 'stage-2', 'react'],
+          presets: ['latest', 'stage-2', 'react'],
         },
       },
     ],
